@@ -28,7 +28,7 @@ block content
 			.tile
 				h3.tile-title Edit Menu
 				.tile-body
-					form(action="/menu/edit/"+ menu._id, method="post")
+					form(action="/menu/edit/"+ menu._id, method="post", enctype="multipart/form-data")
 						.form-group
 							label.control-label Title
 							input.form-control(type="text", value=menu.title, name="title")
@@ -47,7 +47,7 @@ block content
 							input.form-control(type="text", value=menu.price, name ="price")
 						.form-group
 							label.control-label Upload Image
-							input.form-control(type="file", name="img_url", value=menu.img_url)
+							input.form-control(type="file",accept="image/*", name="img_url", value=menu.img_url)
 
 						button.btn.btn-outline-success.mx-2(type='submit') SUBMIT
 						a.btn.btn-outline-warning.mx-2(href='/menu/') Back

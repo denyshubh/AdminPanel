@@ -28,7 +28,7 @@ block content
 			.tile
 				h3.tile-title add category
 				.tile-body
-					form(action="/category/", method="post")
+					form(action="/category/", method="post", enctype="multipart/form-data")
 						.form-group
 							label.control-label Title
 							input.form-control(type="text", name="title")
@@ -37,7 +37,7 @@ block content
 							input.form-control(type="text", name="desc")
 						.form-group
 							label.control-label Upload Image
-							input.form-control(type="file", name="img", )
+							input.form-control(type="file", accept="image/*", name="img_url", )
 
 						button.btn.btn-outline-success.mx-2(type='submit') Add
 						a.btn.btn-outline-warning.mx-2(href='/category/') Back

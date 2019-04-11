@@ -13,6 +13,7 @@ block content
 			h1
 				i.fa.fa-edit
 				|  add menu
+			p Add new items in your menu list
 
 		ul.app-breadcrumb.breadcrumb
 			li.breadcrumb-item
@@ -28,7 +29,7 @@ block content
 			.tile
 				h3.tile-title add Menu
 				.tile-body
-					form(action="/menu/", method="post")
+					form(action="/menu/", method="post", enctype="multipart/form-data" )
 						.form-group
 							label.control-label Title
 							input.form-control(type="text", name="title")
@@ -47,8 +48,8 @@ block content
 							input.form-control(type="text", name ="price")
 						.form-group
 							label.control-label Upload Image
-							input.form-control(type="file", name="img_url", )
+							input.form-control(type="file", accept="image/*", name="img_url", )
 
-						button.btn.btn-outline-success.mx-2(type='submit') Add
+						button.btn.btn-outline-success.mx-2(type='submit', value="upload") Add
 						a.btn.btn-outline-warning.mx-2(href='/menu/') Back
 	

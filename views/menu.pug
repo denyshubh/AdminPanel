@@ -46,7 +46,8 @@ block content
                                     td #{x.menu_desc}
                                     td #{x.offer_percentage}
                                     td #{x.price}
-                                    td #{x.img_url}
+                                    td
+                                        img.h-auto.w-auto(src=x.img_url, alt = x.img_url)
                                     td  
                                         a.btn.btn-outline-warning(href="/menu/"+x._id) EDIT
                                    

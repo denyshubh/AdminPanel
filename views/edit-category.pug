@@ -28,7 +28,7 @@ block content
 			.tile
 				h3.tile-title Edit category
 				.tile-body
-					form(action="/category/edit/"+ category._id, method="post")
+					form(action="/category/edit/"+ category._id, method="post", enctype="multipart/form-data" )
 						.form-group
 							label.control-label Title
 							input.form-control(type="text", value=category.title, name="title")
@@ -37,7 +37,7 @@ block content
 							input.form-control(type="text", value=category.desc, name="desc")
 						.form-group
 							label.control-label Upload Image
-							input.form-control(type="file", name="img", value=category.img)
+							input.form-control(type="file", name="img_url", accept="image/*", value=category.img)
 
 						button.btn.btn-outline-success.mx-2(type='submit') SUBMIT
 						a.btn.btn-outline-warning.mx-2(href='/category/') Back

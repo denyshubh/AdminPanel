@@ -40,7 +40,8 @@ block content
 									td
 										h5.text-muted #{x.title}
 									td #{x.desc}
-									td #{x.img}
+									td 
+										img.h-auto.w-auto(src=x.img, alt = x.img)
 									td  
 										a.btn.btn-outline-warning(href="/category/"+x._id) EDIT
 							

@@ -17,7 +17,7 @@ const Category =mongoose.model('Category', new mongoose.Schema({
 
     img: {
         type: String,
-        required: true
+       
     }
   }));
 
@@ -39,7 +39,7 @@ const Category =mongoose.model('Category', new mongoose.Schema({
         
       title: Joi.string().max(200).required(),
       desc:  Joi.string().max(2000).min(10).required(),
-      img:   Joi.string().required()
+      img:   Joi.string()
     };
   
     return Joi.validate(category, schema);

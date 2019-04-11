@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 const error = require('../middleware/error');
 const cookieParser = require('cookie-parser');
 
-
 module.exports = function(app) {
   app.use(express.json());
   app.use(bodyParser.urlencoded({

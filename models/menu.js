@@ -32,7 +32,6 @@ const Menu =mongoose.model('Menu', new mongoose.Schema({
     },
     img_url: {
         type: String,
-        required:true
     }
   }));
 
@@ -52,7 +51,7 @@ module.exports.removeMenu = function(query, callback){
 
       title: Joi.string().max(200).required(),
       menu_desc:Joi.string().max(2000).min(10).required(),
-      img_url:Joi.string().required(),
+      img_url:Joi.string(),
       category:Joi.string().required(),
       offer_percentage:Joi.number(),
       extra_ingrediants:Joi.array(),
