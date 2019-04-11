@@ -1,0 +1,54 @@
+extends layouts/_layout.pug
+
+block variables
+	- var activePage = 'form-samples'
+	- var activeGroup = 'forms'
+
+block title
+	title Carson Kitchen
+
+block content
+	.app-title
+		div
+			h1
+				i.fa.fa-edit
+				|  add menu
+
+		ul.app-breadcrumb.breadcrumb
+			li.breadcrumb-item
+				i.fa.fa-home.fa-lg
+			li.breadcrumb-item
+				| Menu
+			li.breadcrumb-item
+				a(href="#") add
+		
+
+	.row
+		.col-md-6
+			.tile
+				h3.tile-title add Menu
+				.tile-body
+					form(action="/menu/", method="post")
+						.form-group
+							label.control-label Title
+							input.form-control(type="text", name="title")
+						.form-group
+							label.control-label Description
+							input.form-control(type="text", name="menu_desc")
+						.form-group
+							label.control-label Offer Percentage %
+							input.form-control(type="text", name="offer_percentage")
+
+						.form-group
+							label.control-label Category
+							input.form-control(type="text", name="category")
+						.form-group
+							label.control-label Price
+							input.form-control(type="text", name ="price")
+						.form-group
+							label.control-label Upload Image
+							input.form-control(type="file", name="img_url", )
+
+						button.btn.btn-outline-success.mx-2(type='submit') Add
+						a.btn.btn-outline-warning.mx-2(href='/menu/') Back
+	

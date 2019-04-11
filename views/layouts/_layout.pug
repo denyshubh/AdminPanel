@@ -1,0 +1,39 @@
+doctype html
+html(lang="en")
+
+	//- Variables to set active page in sidebar
+	block variables
+		- var activePage = 'dashboard'
+		- var activeGroup = 'none'
+
+	head
+
+		block title
+			title CarsonKitchen Admin
+
+		include ../includes/_head.pug
+
+	body.app.sidebar-mini.rtl
+
+		// Navbar
+		include ../includes/_header.pug
+
+		// Sidebar menu
+		include ../includes/_sidebar.pug
+
+		main.app-content
+			block content
+
+		//- Javascripts
+		// Essential javascripts for application to work
+		script(src='js/jquery-3.2.1.min.js')
+		script(src='js/popper.min.js')
+		script(src='js/bootstrap.min.js')
+		script(src='js/main.js')
+
+		// The javascript plugin to display page loading on top
+		script(src='js/plugins/pace.min.js')
+		// Page specific javascripts
+		block specific-js
+
+	

@@ -1,0 +1,48 @@
+.app-sidebar__overlay(data-toggle="sidebar")
+aside.app-sidebar
+
+	.app-sidebar__user
+		img.app-sidebar__user-avatar(src='', alt='User Image')
+		div
+			p.app-sidebar__user-name CarsonKitchen
+			p.app-sidebar__user-designation Admin
+
+	ul.app-menu
+		li
+			a.app-menu__item(href='/' class={'active': activePage == 'dashboard'})
+				i.app-menu__icon.fa.fa-dashboard
+				span.app-menu__label Dashboard
+
+		li.treeview(class={'is-expanded': activeGroup == 'menu'})
+			a.app-menu__item(href='/menu')
+				i.app-menu__icon.fa.fa-laptop
+				span.app-menu__label MENU
+				i.fa.fa-angle-right
+		
+		li
+			a.app-menu__item(href='/add/menu')
+				i.app-menu__icon.fa.fa-laptop
+				span.app-menu__label Add Menu
+				i.fa.fa-angle-right
+	
+
+		li.treeview(class={'is-expanded': activeGroup == 'category'})
+			a.app-menu__item(href='/category')
+				i.app-menu__icon.fa.fa-edit
+				span.app-menu__label CATEGORY
+				i.fa.fa-angle-right
+		li
+			a.app-menu__item(href='/add/category')
+				i.app-menu__icon.fa.fa-laptop
+				span.app-menu__label Add Category
+				i.fa.fa-angle-right
+
+		li
+			a.app-menu__item(href='/logout')
+				i.app-menu__icon.fa.fa-edit
+				span.app-menu__label LOGOUT
+				i.fa.fa-angle-right
+
+	
+
+	

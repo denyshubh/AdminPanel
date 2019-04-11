@@ -1,0 +1,45 @@
+extends layouts/_layout.pug
+
+block variables
+	- var activePage = 'form-samples'
+	- var activeGroup = 'forms'
+
+block title
+	title Carson Kitchen
+
+block content
+	.app-title
+		div
+			h1
+				i.fa.fa-edit
+				|  edit category
+
+		ul.app-breadcrumb.breadcrumb
+			li.breadcrumb-item
+				i.fa.fa-home.fa-lg
+			li.breadcrumb-item
+				| category
+			li.breadcrumb-item
+				a(href="#") Edit
+		
+
+	.row
+		.col-md-6
+			.tile
+				h3.tile-title Edit category
+				.tile-body
+					form(action="/category/edit/"+ category._id, method="post")
+						.form-group
+							label.control-label Title
+							input.form-control(type="text", value=category.title, name="title")
+						.form-group
+							label.control-label Description
+							input.form-control(type="text", value=category.desc, name="desc")
+						.form-group
+							label.control-label Upload Image
+							input.form-control(type="file", name="img", value=category.img)
+
+						button.btn.btn-outline-success.mx-2(type='submit') SUBMIT
+						a.btn.btn-outline-warning.mx-2(href='/category/') Back
+						a.btn.btn-outline-danger.mx-2(href='/category/delete/'+category._id) Delete
+	

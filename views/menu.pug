@@ -1,0 +1,58 @@
+extends layouts/_layout.pug
+
+block variables
+    - var activePage = 'data-table'
+    - var activeGroup = 'tables'
+
+block title
+    title CarsonKitchen
+
+block content
+    .app-title
+        div
+            h1
+                i.fa.fa-th-list
+                |  Menu
+            p Table to display menu of food
+
+        ul.app-breadcrumb.breadcrumb.side
+            li.breadcrumb-item
+                i.fa.fa-home.fa-lg
+            li.breadcrumb-item
+                | Menu
+            li.breadcrumb-item.active
+                a(href="#") Menu Table
+
+    .row
+        .col-md-12
+            .tile
+                .tile-body
+                    table.table.table-hover.table-bordered#sampleTable
+                        thead
+                            tr
+                                th Category
+                                th Title
+                                th Description
+                                th Offer
+                                th Price
+                                th Image
+                                th Edit
+                        tbody
+                            each x in menu
+                                tr
+                                    td
+                                        h5.text-muted #{x.category}
+                                    td #{x.title}
+                                    td #{x.menu_desc}
+                                    td #{x.offer_percentage}
+                                    td #{x.price}
+                                    td #{x.img_url}
+                                    td  
+                                        a.btn.btn-outline-warning(href="/menu/"+x._id) EDIT
+                                   
+block specific-js
+    // Data table plugin
+    script(type='text/javascript', src="js/plugins/jquery.dataTables.min.js")
+    script(type='text/javascript', src="js/plugins/dataTables.bootstrap.min.js")
+    script(type='text/javascript').
+        $('#sampleTable').DataTable();

@@ -1,0 +1,53 @@
+extends layouts/_layout.pug
+
+block variables
+	- var activePage = 'data-table'
+	- var activeGroup = 'tables'
+
+block title
+	title CarsonKitchen
+
+block content
+	.app-title
+		div
+			h1
+				i.fa.fa-th-list
+				|  category
+			p Table to display categories of food
+
+		ul.app-breadcrumb.breadcrumb.side
+			li.breadcrumb-item
+				i.fa.fa-home.fa-lg
+			li.breadcrumb-item
+				| Category
+			li.breadcrumb-item.active
+				a(href="#") Category Table
+
+	.row
+		.col-md-12
+			.tile
+				.tile-body
+					table.table.table-hover.table-bordered#sampleTable
+						thead
+							tr
+								th Title
+								th Description
+								th Img
+								th Edit
+						tbody
+							each x in category
+								tr
+									td
+										h5.text-muted #{x.title}
+									td #{x.desc}
+									td #{x.img}
+									td  
+										a.btn.btn-outline-warning(href="/category/"+x._id) EDIT
+							
+
+block specific-js
+	// Data table plugin
+	script(type='text/javascript', src="js/plugins/jquery.dataTables.min.js")
+	script(type='text/javascript', src="js/plugins/dataTables.bootstrap.min.js")
+	script(type='text/javascript').
+		$('#sampleTable').DataTable();
