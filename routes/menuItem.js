@@ -13,6 +13,7 @@ router.post('/',upload, async (req,res) => {
 
   const path = req.file.destination+"/"+req.file.filename;
   thumb(path.substring(2),req.file.filename);
+  
     let menu = new Menu({ 
 
         title:req.body.title,

@@ -1,0 +1,62 @@
+extends layouts/_layout.pug
+
+block variables
+    - var activePage = 'data-table'
+    - var activeGroup = 'tables'
+
+block title
+    title CarsonKitchen
+
+block content
+    .app-title
+        div
+            h1
+                i.fa.fa-th-list
+                |  Booking
+            p Upcoming Bookings
+
+        ul.app-breadcrumb.breadcrumb.side
+            li.breadcrumb-item
+                i.fa.fa-home.fa-lg
+            li.breadcrumb-item
+                | Booking
+            li.breadcrumb-item.active
+                a(href="#") Booking Table
+
+    .row
+        .col-md-12
+            .tile
+                .tile-body
+                    table.table.table-hover.table-bordered#sampleTable
+                        thead
+                            tr
+                                th Table
+                                th Date
+                                th Guests
+                                th Duration
+                                th Customer Details
+                                th Booked On
+                                th Purpose
+                                th Action
+                        tbody
+                            each x in reservation
+                                tr
+                                    td #{x.table}
+                                    td #{x.booking_date}
+                                    td #{x.no_of_guest}
+                                    td 
+                                        p   #{x.duration} hrs
+                                    td 
+                                        p   #{x.customer_id.name}
+                                    td #{x.booked_on}
+                                    td #{x.purpose}
+                                    td  
+                                        a.btn.btn-outline-primary(href="/confirm/"+x._id) Accept
+                                        a.btn.btn-outline-danger.mt-2(href="/reject/"+x._id) Cancel
+
+block specific-js
+    // Data table plugin
+    script(type='text/javascript', src="js/plugins/jquery.dataTables.min.js")
+    script(type='text/javascript', src="js/plugins/dataTables.bootstrap.min.js")
+    script(type='text/javascript').
+        $('#sampleTable').DataTable();
