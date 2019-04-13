@@ -5,16 +5,11 @@ const users = require('../routes/users');
 const auth = require('../routes/auth');
 const index = require('../routes/index');
 const reservation = require('../routes/reservations');
-const bodyParser = require('body-parser');
 const error = require('../middleware/error');
 const cookieParser = require('cookie-parser');
 
 
 module.exports = function(app) {
-  app.use(express.json());
-  app.use(bodyParser.urlencoded({
-    extended: true
-  }));
   app.use(cookieParser());
   app.use('/menu', menuItem);
   app.use('/category',category);

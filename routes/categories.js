@@ -4,6 +4,7 @@ const { Category, validate, updateCategory, removeCategory  } = require('../mode
 const router =  express.Router();
 const jwt = require('jsonwebtoken');
 const Jimp = require('jimp');
+const { Menu, getCategoryMenus } = require('../models/menu'); 
 
 router.post('/', upload, async (req,res) => {
 
@@ -26,13 +27,24 @@ router.post('/', upload, async (req,res) => {
 });
 
 router.get('/', async (req, res) => {
-  const category = await Category.find().sort('title');
+  const category = await Category.find();
   if(IsAdmin(req)){
       res.render('category', {category});
   }
   else
        res.render('login');
      
+});
+
+router.get('/all', async (req, res) => {
+  const categories = await Category.find();
+  let x = [];
+  
+  for(var i =0; i<categories.length; i++)
+  { 
+    x.push(await Menu.find({categoryId:categories[i]._id}).populate('category'));
+  }
+  res.send(x);
 });
 
 router.post('/edit/:id', upload, (req, res) => {

@@ -47,12 +47,12 @@ block content
                                     td 
                                         p   #{x.duration} hrs
                                     td 
-                                        p   #{x.customer_id.name}
+                                        p   #{x.customer_id._id}
                                     td #{x.booked_on}
                                     td #{x.purpose}
                                     td  
-                                        a.btn.btn-outline-primary(href="/confirm/"+x._id) Accept
-                                        a.btn.btn-outline-danger.mt-2(href="/reject/"+x._id) Cancel
+                                        a.btn.btn-outline-primary(href="/reservation/"+x._id) Accept
+                                        a.btn.btn-outline-danger(href='/reservation/delete/'+x._id) Delete
 
 block specific-js
     // Data table plugin

@@ -22,7 +22,7 @@ block content
 				| Menu
 			li.breadcrumb-item
 				a(href="#") add
-		
+
 
 	.row
 		.col-md-6
@@ -39,10 +39,12 @@ block content
 						.form-group
 							label.control-label Offer Percentage %
 							input.form-control(type="text", name="offer_percentage")
-
 						.form-group
 							label.control-label Category
-							input.form-control(type="text", name="category")
+							select.form-control(name='category')
+								each x in category
+									option(value=x._id) #{x.title}
+						
 						.form-group
 							label.control-label Price
 							input.form-control(type="text", name ="price")
@@ -52,4 +54,4 @@ block content
 
 						button.btn.btn-outline-success.mx-2(type='submit', value="upload") Add
 						a.btn.btn-outline-warning.mx-2(href='/menu/') Back
-	
+

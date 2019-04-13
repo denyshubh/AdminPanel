@@ -1,6 +1,7 @@
 const upload    = require('../middleware/upload');
 const express = require('express');
-const { Menu, validate, updateMenu, removeMenu } = require('../models/menu'); 
+const { Menu, validate, removeMenu} = require('../models/menu'); 
+const Category = require('../models/category');
 const router =  express.Router();
 const jwt = require('jsonwebtoken');
 const Jimp = require('jimp');
@@ -13,29 +14,31 @@ router.post('/',upload, async (req,res) => {
 
   const path = req.file.destination+"/"+req.file.filename;
   thumb(path.substring(2),req.file.filename);
-  
+
+    
     let menu = new Menu({ 
 
-        title:req.body.title,
-        menu_desc:req.body.menu_desc,
-        offer_percentage:req.body.offer_percentage,
-        category:req.body.category,
-        extra_ingrediants:req.body.extra_ingrediants,
-        price:req.body.price,
-        img_url:path.substring(8)
-      });
-      menu = await menu.save();
+      title:req.body.title,
+      menu_desc:req.body.menu_desc,
+      offer_percentage:req.body.offer_percentage,
+      category:req.body.category,
+      categoryId:req.body.category.toString(),
+      extra_ingrediants:req.body.extra_ingrediants,
+      price:req.body.price,
+      img_url:path.substring(8)
+    });
+    menu = await menu.save();
 
-      res.redirect("/menu");
+    res.redirect("/menu");
 
 });
 
 router.get('/', async (req, res) => {
 
-  const menu = await Menu.find().sort('title');
+  const menu = await Menu.find().populate('category').sort('title');
  
    if(IsAdmin(req)){
-
+      //   res.send(menu);
       res.render('menu', {menu});
   }
   else
@@ -43,31 +46,27 @@ router.get('/', async (req, res) => {
      
 });
 
-router.post('/edit/:id',upload,(req, res) => {
+router.post('/edit/:id',upload,async (req, res) => {
   const { error } = validate(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
-  const query = {_id: req.params.id};
   const path = req.file.destination+"/"+req.file.filename;
   thumb(path.substring(2),req.file.filename);
-  const update=
+    
+  const menu=await Menu.findByIdAndUpdate(req.params.id, 
     { 
       title:req.body.title,
       menu_desc:req.body.menu_desc,
       offer_percentage:req.body.offer_percentage,
       category:req.body.category,
+      categoryId:req.body.category.toString(),
       extra_ingrediants:req.body.extra_ingrediants,
       price:req.body.price,
       img_url:path.substring(8)
-    };
+    }, { new: true });
 
-    updateMenu(query, update, {}, (err, menu) => {
-      if(err){
-        return res.status(404).send('The menu with the given ID was not found.');
-      }
-
+    if (!menu) return res.status(404).send('The movie with the given ID was not found.');
+    else
      res.redirect('/menu');
-});
-
 });
 
 
@@ -89,10 +88,15 @@ router.all('/delete/:id', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const menu = await Menu.findById(req.params.id);
   if (!menu) return res.status(404).send('The menu with the given ID was not found.');
-  if(IsAdmin(req))
-   res.render('edit-menu',{menu});
+  Category.getCategories((err, categories) => {
+    if(IsAdmin(req))
+    res.render('edit-menu',{
+      menu:menu,
+      category:categories
+    });
 });
 
+});
 
 function IsAdmin(req)
 {

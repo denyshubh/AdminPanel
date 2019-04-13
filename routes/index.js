@@ -2,7 +2,7 @@
 const express = require('express');
 const router =  express.Router();
 const jwt = require('jsonwebtoken');
- 
+const Category = require('../models/category');
 
 
 router.get('/', (req,res) => {
@@ -28,12 +28,13 @@ router.get('/logout', (req,res) => {
 });
 
 router.get('/add/menu', (req,res) => {
-
+ Category.getCategories((err, categories) => {
     if(IsAdmin(req)){
-        res.render('add-menu');
+        res.render('add-menu', {category: categories});
     }
-
+    else
         res.render('login'); 
+});
 });
 
 router.get('/add/category', (req,res) => {
@@ -41,7 +42,7 @@ router.get('/add/category', (req,res) => {
     if(IsAdmin(req)){
         res.render('add-category');
     }
-
+    else
         res.render('login'); 
 });
 

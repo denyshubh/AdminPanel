@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
-const Category =mongoose.model('Category', new mongoose.Schema({
+
+const Category =  mongoose.model('Category', new mongoose.Schema({
 
     title: {
       type: String,
@@ -19,8 +20,8 @@ const Category =mongoose.model('Category', new mongoose.Schema({
         type: String,
        
     }
-  }));
 
+  }));
 
   
   // Update Category
@@ -31,7 +32,17 @@ const Category =mongoose.model('Category', new mongoose.Schema({
   // Remove Category
   module.exports.removeCategory = function(query, callback){
     Category.remove(query, callback);
-  }
+  };
+
+  // Get Categories
+module.exports.getCategories = function(callback, limit){
+  Category.find(callback).limit(limit);
+};
+
+// Get Single Category By Id
+module.exports.getCategoryById = function(id, callback){
+  Category.findById(id, callback);
+};
   
 
   function validateCategory(category) {
@@ -45,6 +56,6 @@ const Category =mongoose.model('Category', new mongoose.Schema({
     return Joi.validate(category, schema);
   }
   
-module.exports.updateCategory = updateCategory;
 module.exports.Category = Category;
 module.exports.validate = validateCategory;
+module.exports.updateCategory = updateCategory;

@@ -41,7 +41,9 @@ block content
 
 						.form-group
 							label.control-label Category
-							input.form-control(type="text", value=menu.category, name="category")
+							select.form-control(name='category')
+								each x in category
+									option(value=x._id) #{x.title}
 						.form-group
 							label.control-label Price
 							input.form-control(type="text", value=menu.price, name ="price")

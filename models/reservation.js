@@ -58,6 +58,10 @@ function validateReservation(reservation) {
     return Joi.validate(reservation, schema);
   };
 
+  module.exports.removeReservation = function(query, callback){
+    Reservation.remove(query, callback);
+  }
+
   module.exports.Reservation = Reservation;
   module.exports.validate = validateReservation;
   

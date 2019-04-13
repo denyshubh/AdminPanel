@@ -17,9 +17,10 @@ const Menu =mongoose.model('Menu', new mongoose.Schema({
       type: Number
     },
     category: {
-      type: String,
-      required:true
+      type: mongoose.Schema.Types.ObjectId,  
+      ref: 'Category'
     },
+    categoryId: String,
     extra_ingrediants: {
       type: [ {
           ingrediant_name: String,
@@ -52,7 +53,8 @@ module.exports.removeMenu = function(query, callback){
       title: Joi.string().max(200).required(),
       menu_desc:Joi.string().max(2000).min(10).required(),
       img_url:Joi.string(),
-      category:Joi.string().required(),
+      categoryId: Joi.string(),
+      category:Joi.required(),
       offer_percentage:Joi.number(),
       extra_ingrediants:Joi.array(),
       price:Joi.number().required()

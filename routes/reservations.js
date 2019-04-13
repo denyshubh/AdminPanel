@@ -1,5 +1,5 @@
 const express = require('express');
-const { Reservation, validate} = require('../models/reservation'); 
+const { Reservation, validate, removeReservation } = require('../models/reservation'); 
 const router =  express.Router();
 
 router.post('/', async (req,res) => {
@@ -28,22 +28,31 @@ router.post('/', async (req,res) => {
 router.get('/:id', async (req,res) => {
 
     const reservation = await Reservation
-                            .findById(req.params.id)
-                            .sort('table')
-                            .populate('customer_id');
-
-    res.send(reservation);
+                            .findById(req.params.id);
 
 });
 
 router.get('/', async (req,res) => {
     const reservation = await Reservation
                                 .find()
-                                .sort('table')
+                                .sort('booking_date')
                                 .populate('customer_id');
 
 
     res.render('bookinglist',{reservation});
 });
+
+router.all('/delete/:id', async (req, res) => {
+    const query = {_id: req.params.id}
+    
+      removeReservation(query, (err, reservation)=> {
+        if(err) {
+          return res.status(404).send('The reservation with the given ID was not found.');
+        }
+        res.redirect('/reservation');
+      });
+  
+  });
+  
 
 module.exports = router; 
