@@ -27,9 +27,12 @@ router.post('/',upload, async (req,res) => {
       price:req.body.price,
       img_url:path.substring(8)
     });
-    menu = await menu.save();
 
-    res.redirect("/menu");
+    if(IsAdmin(req))
+     {menu = await menu.save();
+    res.redirect("/menu");}
+    else
+    res.redirect('/login')
 
 });
 
@@ -42,7 +45,7 @@ router.get('/', async (req, res) => {
       res.render('menu', {menu});
   }
   else
-       res.render('login');
+  res.redirect('/login')
      
 });
 
@@ -51,8 +54,8 @@ router.post('/edit/:id',upload,async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
   const path = req.file.destination+"/"+req.file.filename;
   thumb(path.substring(2),req.file.filename);
-    
-  const menu=await Menu.findByIdAndUpdate(req.params.id, 
+    if(IsAdmin(req))
+ { const menu=await Menu.findByIdAndUpdate(req.params.id, 
     { 
       title:req.body.title,
       menu_desc:req.body.menu_desc,
@@ -67,6 +70,8 @@ router.post('/edit/:id',upload,async (req, res) => {
     if (!menu) return res.status(404).send('The movie with the given ID was not found.');
     else
      res.redirect('/menu');
+    }
+     else   res.redirect('/login')
 });
 
 
@@ -81,6 +86,8 @@ router.all('/delete/:id', async (req, res) => {
       res.redirect('/menu');
     });
   }
+  else
+  res.redirect('/login')
 
 });
 
@@ -94,6 +101,8 @@ router.get('/:id', async (req, res) => {
       menu:menu,
       category:categories
     });
+    else
+    res.redirect('/login')
 });
 
 });

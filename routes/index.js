@@ -25,7 +25,7 @@ router.get('/', async (req,res) => {
     if(IsAdmin(req))
          res.render('index',{month1, month2});
     else
-        res.render('login');
+    res.redirect('/login')
 });
 
 router.get('/login', (req,res) => {
@@ -48,7 +48,7 @@ router.get('/add/menu', (req,res) => {
         res.render('add-menu', {category: categories});
     }
     else
-        res.render('login'); 
+    res.redirect('/login')
 });
 });
 
@@ -58,7 +58,7 @@ router.get('/add/category', (req,res) => {
         res.render('add-category');
     }
     else
-        res.render('login'); 
+    res.redirect('/login')
 });
 router.get('/add/review', (req,res) => {
     
@@ -66,7 +66,7 @@ router.get('/add/review', (req,res) => {
         res.render('add-review');
     }
     else
-        res.render('login'); 
+    res.redirect('/login')
 });
 
 router.get('/confirmed', async (req,res) => {
@@ -87,7 +87,10 @@ router.get('/confirmed', async (req,res) => {
                 history.push(x);
                 
       });
+      if(IsAdmin(req))
        res.render('booking-history',{history, upcoming});
+       else
+       res.redirect('/login')
   });
 
 function IsAdmin(req)

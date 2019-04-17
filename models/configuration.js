@@ -3,10 +3,13 @@ const Joi = require('joi');
 
 const Config =  mongoose.model('Config', new mongoose.Schema({
 
-   adminData:{
-       type:[Object],
-   }
-
+    name: {
+        type: String,
+        required: true
+    },
+    data:{
+       type:[Object]
+    }
   }));
 
 

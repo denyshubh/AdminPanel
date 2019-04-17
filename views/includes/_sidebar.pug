@@ -2,7 +2,7 @@
 aside.app-sidebar
 
 	.app-sidebar__user
-		img.app-sidebar__user-avatar(src='', alt='User Image')
+		img.app-sidebar__user-avatar.h-25.w-25(src='https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png', alt='User Image')
 		div
 			p.app-sidebar__user-name CarsonKitchen
 			p.app-sidebar__user-designation Admin
@@ -10,58 +10,41 @@ aside.app-sidebar
 	ul.app-menu
 		li
 			a.app-menu__item(href='/' class={'active': activePage == 'dashboard'})
-				i.app-menu__icon.fa.fa-dashboard
+				i.app-menu__icon.fa.fa-dashboard.text-danger
 				span.app-menu__label Dashboard
 
 		li.treeview(class={'is-expanded': activeGroup == 'menu'})
 			a.app-menu__item(href='/menu')
-				i.app-menu__icon.fa.fa-laptop
+				i.app-menu__icon.fa.fa-yelp.text-success
 				span.app-menu__label MENU
-				i.fa.fa-angle-right
-		
-		li
-			a.app-menu__item(href='/add/menu')
-				i.app-menu__icon.fa.fa-laptop
-				span.app-menu__label Add Menu
-				i.fa.fa-angle-right
-	
-
+				
 		li.treeview(class={'is-expanded': activeGroup == 'category'})
 			a.app-menu__item(href='/category')
-				i.app-menu__icon.fa.fa-edit
+				i.app-menu__icon.fa.fa-th-large.text-warning
 				span.app-menu__label CATEGORY
-				i.fa.fa-angle-right
-		li
-			a.app-menu__item(href='/add/category')
-				i.app-menu__icon.fa.fa-laptop
-				span.app-menu__label Add Category
-				i.fa.fa-angle-right
+				
 		li
 			a.app-menu__item(href='/review')
-				i.app-menu__icon.fa.fa-laptop
+				i.app-menu__icon.fa.fa-twitter.text-info
 				span.app-menu__label review
-				i.fa.fa-angle-right
-		li
-			a.app-menu__item(href='/add/review')
-				i.app-menu__icon.fa.fa-laptop
-				span.app-menu__label Add Review
-				i.fa.fa-angle-right
+				
+				
 		li
 			a.app-menu__item(href='/reservation')
-				i.app-menu__icon.fa.fa-laptop
+				i.app-menu__icon.fa.fa-pencil-square-o.text-primary
 				span.app-menu__label Reservation
-				i.fa.fa-angle-right
+				
 		li
 			a.app-menu__item(href='/confirmed')
-				i.app-menu__icon.fa.fa-laptop
+				i.app-menu__icon.fa.fa-money.text-success
 				span.app-menu__label Confirmed Bookings
-				i.fa.fa-angle-right
+				
 
 		li
 			a.app-menu__item(href='/logout')
-				i.app-menu__icon.fa.fa-edit
+				i.app-menu__icon.fa.fa-sign-out.text-danger
 				span.app-menu__label LOGOUT
-				i.fa.fa-angle-right
+				
 
 	
 

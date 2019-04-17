@@ -9,9 +9,9 @@ router.post('/', async (req,res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   let config = new Config({ 
+    name: req.body.name,
     adminData:req.body.adminData
   });
-
  config = await config.save();
   res.send(config);
 

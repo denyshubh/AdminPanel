@@ -19,10 +19,12 @@ router.post('/', upload, async (req,res) => {
         message:req.body.message,
         img:path.substring(8)
       });
-
-     review = await review.save();
-
-      res.redirect('/review');
+      if(IsAdmin(req))
+        {  review = await review.save();
+            res.redirect('/review');
+          }
+      else
+          res.redirect('/login');
 
 });
 
@@ -32,7 +34,7 @@ router.get('/', async (req, res) => {
       res.render('review', {review});
   }
   else
-       res.render('login');
+  res.redirect('/login');
      
 });
 
@@ -50,27 +52,31 @@ router.post('/edit/:id', upload, (req, res) => {
         img:path.substring(8)
     };
 
-    updateReview(query, update, {}, (err, review) => {
+    if(IsAdmin(req))
+    {updateReview(query, update, {}, (err, review) => {
       if(err){
         return res.status(404).send('The review with the given ID was not found.');
       }
-
      res.redirect('/review');
 });
-
+    }
+    else
+    res.redirect('/login');
 });
 
 
 router.all('/delete/:id', async (req, res) => {
   const query = {_id: req.params.id}
   if(IsAdmin(req))
-    removeReview(query, (err, review)=> {
+   { removeReview(query, (err, review)=> {
       if(err) {
         return res.status(404).send('The review with the given ID was not found.');
       }
       res.redirect('/review');
      });
-
+}
+else
+res.redirect('/login');
 });
 
 router.get('/:id', async (req, res) => {
@@ -79,6 +85,8 @@ router.get('/:id', async (req, res) => {
   {    if (!review) return res.status(404).send('The review with thegiven ID was not found.');
       res.render('edit-review', {review});
   }
+  else
+  res.redirect('/login');
 });
 
 

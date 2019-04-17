@@ -20,9 +20,13 @@ router.post('/', upload, async (req,res) => {
         img:path.substring(8)
       });
 
-     category = await category.save();
-
-      res.redirect('/category');
+      if(IsAdmin(req))
+        {
+          category = await category.save();
+        res.redirect('/category');
+      }
+      else
+        res.redirect('/login');
 
 });
 
@@ -44,7 +48,8 @@ router.get('/all', async (req, res) => {
   { 
     x.push(await Menu.find({categoryId:categories[i]._id}).populate('category'));
   }
-  res.send(x);
+  if(IsAdmin(req))
+    res.send(x);
 });
 
 router.post('/edit/:id', upload, (req, res) => {
@@ -60,15 +65,17 @@ router.post('/edit/:id', upload, (req, res) => {
       desc:req.body.desc,
       img:path.substring(8)
     };
-
-    updateCategory(query, update, {}, (err, category) => {
+    
+    if(IsAdmin(req))
+  {  updateCategory(query, update, {}, (err, category) => {
       if(err){
         return res.status(404).send('The category with the given ID was not found.');
       }
 
      res.redirect('/category');
 });
-
+}
+res.redirect('/login');
 });
 
 

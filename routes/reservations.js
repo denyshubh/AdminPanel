@@ -1,7 +1,7 @@
 const express = require('express');
 const { Reservation, validate, removeReservation } = require('../models/reservation'); 
 const router =  express.Router();
-
+const jwt = require('jsonwebtoken');
 
 
 router.post('/', async (req,res) => {
@@ -23,6 +23,7 @@ router.post('/', async (req,res) => {
         customer_id:req.body.customer_id
       
     });
+  
     reservation = await reservation.save();
     res.send(reservation);
   }
@@ -30,14 +31,17 @@ router.post('/', async (req,res) => {
 });
 
 router.get('/', async (req,res) => {
-
-  const reservation = await Reservation
+  if(IsAdmin(req))
+ { const reservation = await Reservation
                                 .find({confirmedStatus: -1})
                                 .sort('booking_date')
                                 .populate('customer_id');
     if(!reservation) return res.status(404).send('Sorry You Do not any Reservations.');
     else
-     res.render('bookinglist',{reservation});
+     res.render('bookinglist',{reservation});}
+
+     else
+     res.redirect('/login')
 });
 
 
@@ -49,7 +53,8 @@ router.get('/:id', async (req,res) => {
 });
 
 router.all('/delete/:id', async (req, res) => {
-  const id = {_id: req.params.id}
+  if(IsAdmin(req))
+ { const id = {_id: req.params.id}
   try {
    const updates = await Reservation.updateOne(
        { "_id" : id },
@@ -59,12 +64,15 @@ router.all('/delete/:id', async (req, res) => {
     res.redirect('/reservation');
  } catch (e) {
     print(e);
- }
-  
+ }}
+  else
+  res.redirect('/login')
   });
   
 router.post('/update/:id', async (req,res) => {
-  const id = {_id: req.params.id}
+
+  if(IsAdmin(req))
+  {const id = {_id: req.params.id}
   try {
    const updates = await Reservation.updateOne(
        { "_id" : id },
@@ -74,8 +82,19 @@ router.post('/update/:id', async (req,res) => {
     res.redirect('/reservation');
  } catch (e) {
     print(e);
- }
+ }}
+ res.redirect('/login');
 });
+
+function IsAdmin(req)
+{
+  const { token } = req.cookies;
+  var decoded = jwt.decode(token, {complete: true});
+  var admin;
+  if(token!=undefined)
+       admin = decoded.payload.isAdmin;
+  return admin;
+}
 
   function IsUserLoggedIn(req)
 {
