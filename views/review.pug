@@ -12,16 +12,16 @@ block content
 		div
 			h1
 				i.fa.fa-th-list
-				|  category
+				|  review
 			p Table to display categories of food
 
 		ul.app-breadcrumb.breadcrumb.side
 			li.breadcrumb-item
 				i.fa.fa-home.fa-lg
 			li.breadcrumb-item
-				| Category
+				| Review
 			li.breadcrumb-item.active
-				a(href="#") Category Table
+				a(href="#") Review Table
 
 	.row
 		.col-md-12
@@ -30,20 +30,20 @@ block content
 					table.table.table-hover.table-bordered#sampleTable
 						thead
 							tr
-								th Title
-								th Description
+								th Heading
+								th Message
 								th Img
 								th Edit
 						tbody
-							each x in category
+							each x in review
 								tr
 									td
-										h5.text-muted #{x.title}
-									td #{x.desc}
+										h5.text-muted #{x.head}
+									td #{x.message}
 									td 
-										img(src=x.img, alt = x.img, style="height: 50px")
+										img.w-auto(src=x.img, alt = x.img, style="height: 50px")
 									td  
-										a.btn.btn-outline-warning(href="/category/"+x._id) EDIT
+										a.btn.btn-outline-warning(href="/review/"+x._id) EDIT
 							
 
 block specific-js

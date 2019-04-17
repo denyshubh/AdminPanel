@@ -1,0 +1,45 @@
+extends layouts/_layout.pug
+
+block variables
+	- var activePage = 'form-samples'
+	- var activeGroup = 'forms'
+
+block title
+	title Carson Kitchen
+
+block content
+	.app-title
+		div
+			h1
+				i.fa.fa-edit
+				|  edit review
+
+		ul.app-breadcrumb.breadcrumb
+			li.breadcrumb-item
+				i.fa.fa-home.fa-lg
+			li.breadcrumb-item
+				| review
+			li.breadcrumb-item
+				a(href="#") Edit
+		
+
+	.row
+		.col-md-6
+			.tile
+				h3.tile-title Edit Review
+				.tile-body
+					form(action="/review/edit/"+ review._id, method="post", enctype="multipart/form-data" )
+						.form-group
+							label.control-label Heading
+							input.form-control(type="text", value=review.head, name="head")
+						.form-group
+							label.control-label Message
+							textarea.form-control(type="text", name="message") #{review.message}
+						.form-group
+							label.control-label Upload Image
+							input.form-control(type="file", name="img_url", accept="image/*", value=review.img)
+
+						button.btn.btn-outline-success.mx-2(type='submit') SUBMIT
+						a.btn.btn-outline-warning.mx-2(href='/review/') Back
+						a.btn.btn-outline-danger.mx-2(href='/review/delete/'+review._id) Delete
+	

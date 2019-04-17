@@ -20,8 +20,16 @@ router.post('/', async (req, res) => {
   const token = user.generateAuthToken();
 
   res.clearCookie('token');
-  res.cookie('token', token, { maxAge: 2628000000 })  
-     .redirect('/');  // maxAge is set to 1 months
+
+  var decoded = jwt.decode(token, {complete: true});
+  var admin = decoded.payload.isAdmin;
+  if(admin)       
+      {res.cookie('token', token, { maxAge: 2628000000 })  
+        .redirect('/');  // maxAge is set to 1 months
+      }
+  else
+      res.cookie('token', token, { maxAge: 2628000000 })
+          .send('What EVER YOU WANT');
 });
 
 function validate(req) {

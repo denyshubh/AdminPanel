@@ -1,0 +1,26 @@
+extends layouts/_layout.pug
+
+block title
+    title CarsonKitchen
+
+block content
+    .app-title
+        div
+            h1
+                i.fa.fa-th-list
+                | Configurations
+
+        ul.app-breadcrumb.breadcrumb.side
+            li.breadcrumb-item
+                i.fa.fa-home.fa-lg
+            li.breadcrumb-item
+                | Configuratoioions
+
+    .row
+        .col-md-12
+            .tile
+                .tile-body
+                    for each x in config
+                        .container
+                            label #{x}
+                    

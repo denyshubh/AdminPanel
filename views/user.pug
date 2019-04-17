@@ -1,0 +1,58 @@
+extends layouts/_layout.pug
+
+block variables
+	- var activePage = 'user-page'
+	- var activeGroup = 'pages'
+
+block title
+	title User Profile
+
+block content
+
+	.row.user
+		.col-md-12
+			.profile
+				.info
+					img.user-img(src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg")
+					h4 #{user.name}
+					p Admin
+				.cover-image
+
+		.col-md-9
+				#user-settings.tab-pane
+					.tile.user-settings
+						h4.line-head Settings
+
+						form
+							.row.mb-4
+								.col-md-4
+									label First Name
+									input.form-control(type="text")
+
+								.col-md-4
+									label Last Name
+									input.form-control(type="text")
+
+							.row
+								.col-md-8.mb-4
+									label Email
+									input.form-control(type="text")
+
+								.clearfix
+
+								.col-md-8.mb-4
+									label Mobile No
+									input.form-control(type="text")
+
+								.clearfix
+
+								.col-md-8.mb-4
+									label Office Phone
+									input.form-control(type="text")
+
+							.row.mb-10
+								.col-md-12
+									button.btn.btn-primary(type="button")
+										i.fa.fa-fw.fa-lg.fa-check-circle
+										|  Save
+

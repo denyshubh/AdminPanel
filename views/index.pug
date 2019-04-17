@@ -40,13 +40,13 @@ block content
 					h4 RESERVATION
 
 	.row
-		.col-md-6
+		.col-md-9
 			.tile
 				h3.tile-title Monthly Sales
 				.embed-responsive.embed-responsive-16by9
 					canvas.embed-responsive-item(id="lineChartDemo")
-
-		.col-md-6
+	.row
+		.col-md-9
 			.tile
 				h3.tile-title Support Requests
 				.embed-responsive.embed-responsive-16by9
@@ -57,7 +57,7 @@ block specific-js
 	script(type='text/javascript', src="js/plugins/chart.js")
 	script(type='text/javascript').
 		var data = {
-			labels: ["January", "February", "March", "April", "May"],
+			labels: ["Jan", "Feb", "March", "April", "May", "June", "July","Aug","Sept", "Oct", "Nov", "Dec"],
 			datasets: [
 				{
 					label: "My First dataset",
@@ -67,7 +67,7 @@ block specific-js
 					pointStrokeColor: "#fff",
 					pointHighlightFill: "#fff",
 					pointHighlightStroke: "rgba(220,220,220,1)",
-					data: [25,10,15,100,54,65,54]
+					data: [25,10,15,100,54,65,54,55,12,68,89,45]
 				},
 				{
 					label: "My Second dataset",
@@ -77,7 +77,7 @@ block specific-js
 					pointStrokeColor: "#fff",
 					pointHighlightFill: "#fff",
 					pointHighlightStroke: "rgba(151,187,205,1)",
-					data: [28, 48, 40, 19, 86]
+					data:  [25,10,95,25,35,68,54,47,5,85,65,12]
 				}
 			]
 		};

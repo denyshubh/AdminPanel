@@ -1,0 +1,83 @@
+extends layouts/_layout.pug
+
+block content
+    .container-fluid.btn-group(role="group")
+        button.btn.btn-info.m-2(data-toggle="collapse",data-target="#upcoming", data-parent="group") UPCOMING
+        button.btn.btn-warning.m-2(data-toggle="collapse",data-target="#previous", data-parent="group") HISTORY
+
+    #upcoming.collapse.show
+        .row
+            .col-md-12
+                .tile
+                    .tile-body
+                        table.table.table-hover.table-bordered#sampleTable
+                            thead
+                                tr
+                                    th Date
+                                    th Guests
+                                    th Duration
+                                    th Customer Details
+                                    th Booked On
+                                    th Purpose
+                                    th Action
+                            tbody
+                                if upcoming
+                                    each x in upcoming
+                                        tr
+                                            td #{x.booking_date}
+                                            td #{x.no_of_guest}
+                                            td 
+                                                p   #{x.duration} hrs
+                                            td 
+                                                p   #{x.customer_id._id}
+                                            td #{x.booked_on}
+                                            td #{x.purpose}
+                                            td  
+                                                if x.confirmedStatus
+                                                    i.text-success.fa.fa-check-square-o
+                                                else
+                                                    i.text-danger.fa.fa-exclamation-triangle
+
+    #previous.collapse
+        .row
+            .col-md-12
+                .tile
+                    .tile-body
+                        table.table.table-hover.table-bordered#sampleTable2
+                            thead
+                                tr
+                                    th Date
+                                    th Guests
+                                    th Duration
+                                    th Customer Details
+                                    th Booked On
+                                    th Purpose
+                                    th Action
+                            tbody
+                                if history 
+                                    each x in history
+                                        tr
+                                            td #{x.booking_date}
+                                            td #{x.no_of_guest}
+                                            td 
+                                                p   #{x.duration} hrs
+                                            td 
+                                                p   #{x.customer_id._id}
+                                            td #{x.booked_on}
+                                            td #{x.purpose}
+                                            td  
+                                                if x.confirmedStatus
+                                                    i.text-success.fa.fa-check-square-o
+                                                else
+                                                    i.text-danger.fa.fa-exclamation-triangle
+            
+    
+
+block specific-js
+    // Data table plugin
+    script(type='text/javascript', src="js/plugins/jquery.dataTables.min.js")
+    script(type='text/javascript', src="js/plugins/dataTables.bootstrap.min.js")
+    script(type='text/javascript').
+        $('#sampleTable').DataTable()
+    script(type='text/javascript').
+        $('#sampleTable2').DataTable()

@@ -30,7 +30,6 @@ block content
                     table.table.table-hover.table-bordered#sampleTable
                         thead
                             tr
-                                th Table
                                 th Date
                                 th Guests
                                 th Duration
@@ -41,22 +40,25 @@ block content
                         tbody
                             each x in reservation
                                 tr
-                                    td #{x.table}
                                     td #{x.booking_date}
                                     td #{x.no_of_guest}
                                     td 
                                         p   #{x.duration} hrs
                                     td 
-                                        p   #{x.customer_id._id}
+                                        p   #{x.customer_id.name}
                                     td #{x.booked_on}
                                     td #{x.purpose}
                                     td  
-                                        a.btn.btn-outline-primary(href="/reservation/"+x._id) Accept
-                                        a.btn.btn-outline-danger(href='/reservation/delete/'+x._id) Delete
+                                        if x.confirmedStatus
+                                            i.text-success.fa.fa-check-square-o
+                                        else
+                                            form(action="/reservation/update/"+x._id, method="post")
+                                                button.btn.btn-outline-primary(type='submit') Accept
+                                            a.btn.btn-outline-danger.mt-2(href='/reservation/delete/'+x._id) Delete
 
 block specific-js
     // Data table plugin
     script(type='text/javascript', src="js/plugins/jquery.dataTables.min.js")
     script(type='text/javascript', src="js/plugins/dataTables.bootstrap.min.js")
     script(type='text/javascript').
-        $('#sampleTable').DataTable();
+        $('#sampleTable').DataTable()
