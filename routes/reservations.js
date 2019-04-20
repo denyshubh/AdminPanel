@@ -12,15 +12,12 @@ router.post('/', async (req,res) => {
     if(IsUserLoggedIn)
     {
       let reservation = new Reservation({ 
-
-        table: req.body.table,
         booking_date:req.body.booking_date,
         time:req.body.time,
         duration:req.body.duration,
         no_of_guest:req.body.no_of_guest,
-        purpose:req.body.purpose,
         booked_on :req.body.booked_on ,
-        customer_id:req.body.customer_id
+        customer:req.body.customer
       
     });
   
@@ -34,8 +31,7 @@ router.get('/', async (req,res) => {
   if(IsAdmin(req))
  { const reservation = await Reservation
                                 .find({confirmedStatus: -1})
-                                .sort('booking_date')
-                                .populate('customer_id');
+                                .sort('booking_date');
     if(!reservation) return res.status(404).send('Sorry You Do not any Reservations.');
     else
      res.render('bookinglist',{reservation});}
