@@ -43,13 +43,13 @@ block content
                                     td #{x.booking_date}
                                     td #{x.no_of_guest}
                                     td 
-                                        p   #{x.duration} hrs
+                                        p   #{x.duration/60} hrs
                                     td 
-                                        p   #{x.customer_id.name}
+                                        p   #{x.customer.name}
                                     td #{x.booked_on}
-                                    td #{x.purpose}
+                                    td #{x.customer.purpose}
                                     td  
-                                        if x.confirmedStatus
+                                        if x.confirmedStatus == 1
                                             i.text-success.fa.fa-check-square-o
                                         else
                                             form(action="/reservation/update/"+x._id, method="post")

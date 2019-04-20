@@ -28,10 +28,12 @@ router.post('/', async (req,res) => {
 });
 
 router.get('/', async (req,res) => {
+
   if(IsAdmin(req))
  { const reservation = await Reservation
                                 .find({confirmedStatus: -1})
                                 .sort('booking_date');
+    console.log(reservation);
     if(!reservation) return res.status(404).send('Sorry You Do not any Reservations.');
     else
      res.render('bookinglist',{reservation});}
