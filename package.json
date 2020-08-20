@@ -13,7 +13,7 @@
   "author": "shubham kumar singh",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.5",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.18.3",
     "config": "^3.1.0",
     "cookie-parser": "^1.4.4",
